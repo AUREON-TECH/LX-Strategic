@@ -3,6 +3,7 @@ on:
   push:
     paths:
       - 'index.html'
+      - 'map-editor.js'
       - 'tests/**'
       - '.github/workflows/test-all.yml'
   workflow_dispatch:
