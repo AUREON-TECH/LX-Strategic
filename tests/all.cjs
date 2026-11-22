@@ -18,7 +18,7 @@ const path = require('node:path');
   await page.locator('#nav [data-view="mapa"]').click();
   await check(width+' mapa editor carregado',async()=>assert.ok(await page.locator('#strategySvg .strategy-node').count()>=4));
   await page.locator('#mapAddIdea').click();
-  await check(width+' novo nó nasce próximo ao nó central',async()=>{const root=await page.locator('#strategySvg .strategy-node[aria-label="LX STRATEGIC"]').getAttribute('transform');const added=await page.locator('#strategySvg .strategy-node').filter({has:page.locator('text', {hasText:'Nova ideia'})}).first().getAttribute('transform');const a=root.match(/translate\(([-\d.]+),([-\d.]+)\)/),b=added.match(/translate\(([-\d.]+),([-\d.]+)\)/);assert.ok(Math.abs((Number(b[1])-Number(a[1]))-230)<2);assert.ok(Math.abs(Number(b[2])-Number(a[2]))<2)});
+  await check(width+' novo nó nasce próximo ao nó central',async()=>{const root=await page.locator('#strategySvg .strategy-node[aria-label="LX STRATEGIC"]').getAttribute('transform');const added=await page.locator('#strategySvg .strategy-node[aria-label="Nova ideia"]').getAttribute('transform');const a=root.match(/translate\(([-\d.]+),([-\d.]+)\)/),b=added.match(/translate\(([-\d.]+),([-\d.]+)\)/);assert.ok(Math.abs((Number(b[1])-Number(a[1]))-230)<2);assert.ok(Math.abs(Number(b[2])-Number(a[2]))<2)});
   await page.locator('#mapNodeName').fill('Ideia QA planejamento 2030');
   await page.locator('#mapNodeName').dispatchEvent('change');
   await check(width+' criar e editar nó',async()=>assert.equal(await page.locator('#strategySvg .strategy-node[aria-label="Ideia QA planejamento 2030"]').count(),1));
